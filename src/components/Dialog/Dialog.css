@@ -1,0 +1,22 @@
+.dialog {
+  margin: 20px 0;
+  display: flex;
+}
+
+.avatar {
+    width: 32px;
+    margin-right: 18px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+}
+
+.date {
+    color: var(--color-subtitle);
+}
+
+.text {
+    margin-top: 10px;
+}

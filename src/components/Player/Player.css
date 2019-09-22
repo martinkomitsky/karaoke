@@ -1,0 +1,67 @@
+.root {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.playerElement {
+    display: none;
+}
+
+.buttonContainer {
+    padding-right: 20px;
+}
+
+.button {
+    background: var(--color-primary);
+    color: white;
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    border: 0;
+    outline: none;
+    display: flex;
+    justify-content: center;
+}
+
+.button:active {
+    opacity: 0.8;
+}
+
+.rangeSliderContainer {
+    width: 100%;
+}
+
+.rangeSlider {
+    width: 100%;
+    border: 0;
+    margin: 8px 0;
+    overflow: hidden;
+    -webkit-appearance: none;
+    outline: none;
+}
+
+.rangeSlider::-webkit-slider-runnable-track {
+    -webkit-appearance: none;
+    background-color: var(--color-slider-track);
+    height: 4px
+}
+
+.rangeSlider::-webkit-slider-thumb {
+    width: 18px;
+    height: 18px;
+    margin-top: -7px;
+    border-radius: 50%;
+    -webkit-appearance: none;
+    cursor: ew-resize;
+    background: var(--color-primary);
+    box-shadow: -700px 0 0 700px var(--color-primary);
+}
+
+.timeContainer {
+    padding-left: 20px;
+}
+
+.time {
+    color: var(--color-subtitle);
+}
