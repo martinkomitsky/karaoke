@@ -1,7 +1,7 @@
 import * as React from 'react';
+import { Avatar } from '../Avatar';
 import * as s from './Dialog.css';
 import * as T from './Dialog.types';
-import {Avatar} from '../Avatar';
 
 export const Dialog: React.FunctionComponent<T.IDialogProps> = props => {
 	const { children, date, text } = props;
@@ -14,9 +14,7 @@ export const Dialog: React.FunctionComponent<T.IDialogProps> = props => {
 				</Avatar>
 			</div>
 			<div className={s.content}>
-				<span className={s.date}>
-					{date}
-				</span>
+				<span className={s.date}>{date}</span>
 				<span className={s.text}>
 					{text}
 					{children}
