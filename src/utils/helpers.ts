@@ -11,7 +11,7 @@ export const appendElementToBody = (element: HTMLElement) => {
 	body.appendChild(element);
 };
 
-export const timeToReadable = (seconds: number) => {
+export const timeToReadable = (seconds: number = 0) => {
 	const date = new Date(seconds * 1000);
 	return `${date
 		.getUTCMinutes()
