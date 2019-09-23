@@ -1,6 +1,6 @@
 export interface IPlayerProps {
 	handleProgress: (seconds: number) => void;
-	playing: boolean;
+	src: string;
 }
 
 export interface IProgressState {

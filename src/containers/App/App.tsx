@@ -10,9 +10,8 @@ import Layout from '../Layout';
 import * as s from './App.css';
 import * as T from './App.types';
 
-class App extends React.Component<T.IAppProps, T.IAppState> {
+class App extends React.Component<{}, T.IAppState> {
 	public state: T.IAppState = {
-		playing: false,
 		time: 0,
 	};
 
@@ -52,8 +51,6 @@ class App extends React.Component<T.IAppProps, T.IAppState> {
 	};
 
 	public render() {
-		const { playing } = this.state;
-
 		return (
 			<div className={s.app}>
 				<Layout>
@@ -69,7 +66,7 @@ class App extends React.Component<T.IAppProps, T.IAppState> {
 						</Card>
 						<Card small>
 							<Player
-								playing={playing}
+								src="/audio.wav"
 								handleProgress={this.handleProgress}
 							/>
 						</Card>

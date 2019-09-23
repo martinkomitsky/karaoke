@@ -6,7 +6,7 @@ import * as T from './Player.types';
 
 export const Player: React.FunctionComponent<T.IPlayerProps> = props => {
 	const ref = React.createRef<ReactPlayer>();
-	const { handleProgress: superHandleProgress } = props;
+	const { handleProgress: superHandleProgress, src } = props;
 	const [time, setTime] = React.useState(0);
 	const [playing, setPlaying] = React.useState(false);
 	const [duration, setDuration] = React.useState(0);
@@ -50,7 +50,7 @@ export const Player: React.FunctionComponent<T.IPlayerProps> = props => {
 			<ReactPlayer
 				className={s.playerElement}
 				ref={ref}
-				url="/audio.wav"
+				url={src}
 				playing={playing}
 				onDuration={handleDuration}
 				onProgress={handleProgress}
