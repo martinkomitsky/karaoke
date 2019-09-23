@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
 	.BundleAnalyzerPlugin;
 const path = require('path');
@@ -21,7 +22,9 @@ module.exports = (env = {}, argv) => {
 			entry: './src/index.tsx',
 			output: {
 				path: dirs.build,
-				filename: `Karaoke.${isDev ? 'development' : 'production.min'}.js`,
+				filename: `Karaoke.${
+					isDev ? 'development' : 'production.min'
+				}.js`,
 			},
 			devServer: {
 				contentBase: [dirs.build, dirs.static],
@@ -56,7 +59,9 @@ module.exports = (env = {}, argv) => {
 								loader: 'postcss-loader',
 								options: {
 									config: {
-										path: path.resolve('./postcss.config.js'),
+										path: path.resolve(
+											'./postcss.config.js'
+										),
 									},
 								},
 							},
@@ -73,6 +78,7 @@ module.exports = (env = {}, argv) => {
 					},
 					isDev,
 				}),
+				new CopyWebpackPlugin([{ from: dirs.static, to: dirs.build }]),
 				new HtmlWebpackPlugin({
 					template: 'src/assets/static/index.html',
 				}),
