@@ -1,20 +1,17 @@
 import classnames from 'classnames';
+import { observer } from 'mobx-react';
 import * as React from 'react';
 import { Card } from '../../components/Card';
 import { Dialog } from '../../components/Dialog';
 import { Player } from '../../components/Player';
+import { PlayerStore } from '../../Models';
 import texts from '../../transcript.json';
 import { ITranscriptWord, TTranscript } from '../../types';
 import { timeToReadable } from '../../utils';
 import Layout from '../Layout';
 import * as s from './App.css';
-import * as T from './App.types';
 
-class App extends React.Component<{}, T.IAppState> {
-	public state: T.IAppState = {
-		time: 0,
-	};
-
+class App extends React.PureComponent<{}, {}> {
 	public renderDialogs = () => {
 		return (texts as TTranscript).map((sentence, index: number) => {
 			return (
@@ -28,7 +25,7 @@ class App extends React.Component<{}, T.IAppState> {
 	};
 
 	public renderWords = (words: ITranscriptWord[]) => {
-		const { time } = this.state;
+		const { time } = PlayerStore;
 
 		return words.map((word, idx) => {
 			const { timeStart, timeEnd } = word;
@@ -67,7 +64,7 @@ class App extends React.Component<{}, T.IAppState> {
 						<Card small>
 							<Player
 								src="/audio.wav"
-								handleProgress={this.handleProgress}
+								// handleProgress={this.handleProgress}
 							/>
 						</Card>
 					</div>
@@ -76,4 +73,4 @@ class App extends React.Component<{}, T.IAppState> {
 		);
 	}
 }
-export default App;
+export default observer(App);

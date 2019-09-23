@@ -1,33 +1,34 @@
+import { observer } from 'mobx-react';
 import * as React from 'react';
 import ReactPlayer from 'react-player';
+import { PlayerStore } from '../../Models';
 import { timeToReadable } from '../../utils';
 import * as s from './Player.css';
 import * as T from './Player.types';
 
-export const Player: React.FunctionComponent<T.IPlayerProps> = props => {
+const PlayerComponent: React.FunctionComponent<T.IPlayerProps> = props => {
 	const ref = React.createRef<ReactPlayer>();
 	const { handleProgress: superHandleProgress, src } = props;
-	const [time, setTime] = React.useState(0);
-	const [playing, setPlaying] = React.useState(false);
-	const [duration, setDuration] = React.useState(0);
 
 	const handlePlaying = () => {
-		setPlaying(!playing);
+		PlayerStore.playing = !PlayerStore.playing;
 	};
 
 	const handleDuration = (seconds: number) => {
-		setDuration(seconds);
+		PlayerStore.duration = seconds;
 	};
 
 	const handleProgress = ({ playedSeconds }: T.IProgressState) => {
-		setTime(playedSeconds);
-		superHandleProgress(playedSeconds);
+		PlayerStore.time = playedSeconds;
+		if (superHandleProgress) {
+			superHandleProgress(playedSeconds);
+		}
 	};
 
 	const handleEnded = () => {
 		const { current } = ref;
-		setPlaying(false);
-		setTime(0);
+		PlayerStore.playing = false;
+		PlayerStore.time = 0;
 
 		if (current !== null) {
 			current.seekTo(0, 'seconds');
@@ -43,7 +44,11 @@ export const Player: React.FunctionComponent<T.IPlayerProps> = props => {
 		}
 	};
 
-	const timerValue = `${timeToReadable(time)}/${timeToReadable(duration)}`;
+	const timerValue = `${timeToReadable(PlayerStore.time)}/${timeToReadable(
+		PlayerStore.duration
+	)}`;
+
+	const imageSrc = `/icons/${PlayerStore.playing ? 'pause' : 'play'}.png`;
 
 	return (
 		<div className={s.root}>
@@ -51,7 +56,7 @@ export const Player: React.FunctionComponent<T.IPlayerProps> = props => {
 				className={s.playerElement}
 				ref={ref}
 				url={src}
-				playing={playing}
+				playing={PlayerStore.playing}
 				onDuration={handleDuration}
 				onProgress={handleProgress}
 				onEnded={handleEnded}
@@ -61,7 +66,7 @@ export const Player: React.FunctionComponent<T.IPlayerProps> = props => {
 			/>
 			<div className={s.buttonContainer}>
 				<button className={s.button} onClick={handlePlaying}>
-					<img src={`/icons/${playing ? 'pause' : 'play'}.png`} />
+					<img src={imageSrc} />
 				</button>
 			</div>
 			<div className={s.rangeSliderContainer}>
@@ -70,8 +75,8 @@ export const Player: React.FunctionComponent<T.IPlayerProps> = props => {
 					step="0.05"
 					type="range"
 					min="0"
-					max={Math.round(duration)}
-					value={Math.round(time)}
+					max={Math.round(PlayerStore.duration)}
+					value={Math.round(PlayerStore.time)}
 					onChange={handleChange}
 				/>
 			</div>
@@ -81,3 +86,4 @@ export const Player: React.FunctionComponent<T.IPlayerProps> = props => {
 		</div>
 	);
 };
+export const Player = observer(PlayerComponent);

@@ -1,5 +1,5 @@
 export interface IPlayerProps {
-	handleProgress: (seconds: number) => void;
+	handleProgress?: (seconds: number) => void;
 	src: string;
 }
 

@@ -7,6 +7,7 @@
 * ES6
 * TypeScript
 * React
+* MobX – на мой взгляд, для текущей задачи избыточен
 * Webpack
 * PostCSS, CSS Modules, Autoprefixer
 * StoryBook
