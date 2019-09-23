@@ -20,18 +20,18 @@
 
 ### Разработка
 
-```
+```bash
 npm start
 ```
 
 ### Сборка
 
-```
+```bash
 npm run build
 ```
 
 ### Анализ размера бандла
 
-```
+```bash
 npm run build:analyze
 ```
