@@ -8,7 +8,7 @@ export const Card: React.FunctionComponent<T.ICardProps> = props => {
 
 	return (
 		<div className={classnames(s.card, { [s.cardSmall]: small })}>
-			{title && <p className={s.cardTitle}>{title}</p>}
+			{title && <h3 className={s.cardTitle}>{title}</h3>}
 			{subtitle && <p className={s.cardSubtitle}>{subtitle}</p>}
 			{separator && <hr className={s.separator} />}
 			{children}
